@@ -31,7 +31,8 @@ class AliExpressPackageCard extends LitElement {
       font-size: 1.4em;
       font-weight: bold;
       margin-bottom: 16px;
-color: var(--primary-text-color);
+      color: var(--primary-text-color);
+      user-select: text;
     }
     .actions {
       display: flex;
@@ -41,7 +42,8 @@ color: var(--primary-text-color);
       display: flex;
       align-items: center;
       margin: 4px 0;
-color: var(--primary-text-color);
+      color: var(--primary-text-color);
+      user-select: text;
     }
     .attribute span {
       margin-right: 8px;
@@ -50,6 +52,7 @@ color: var(--primary-text-color);
       color: var(--link-color, blue);
       text-decoration: underline;
       cursor: pointer;
+      user-select: text;
     }
     ha-icon-button {
       --mdc-icon-button-size: 32px;
@@ -66,8 +69,9 @@ color: var(--primary-text-color);
       border: none;
       border-bottom: 1px solid var(--divider-color, #ccc);
       outline: none;
-background: transparent;
+      background: transparent;
       color: var(--primary-text-color);
+      user-select: text;
     }
     .add-tracking button {
       padding: 8px;
@@ -75,14 +79,14 @@ background: transparent;
       background: none;
       cursor: pointer;
       font-size: 1.2em;
-color: var(--primary-text-color);
+      color: var(--primary-text-color);
     }
     .actions button {
       border: none;
       background: none;
       cursor: pointer;
       font-size: 1.2em;
-color: var(--primary-text-color);
+      color: var(--primary-text-color);
     }
   `;
 
@@ -143,7 +147,12 @@ color: var(--primary-text-color);
   formatTime(timeString) {
     if (!timeString) return "";
     const date = new Date(timeString);
-    return date.toLocaleString([], { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }); // Converts to readable format without year and seconds
+    return date.toLocaleString([], {
+      month: "short",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    }); // Converts to readable format without year and seconds
   }
 
   render() {
@@ -156,7 +165,7 @@ color: var(--primary-text-color);
 
     return html`
       <ha-card class="card">
-        <div class="header">AliExpress Package Tracker</div>
+        <div class="header">${this.config.title}</div>
         ${showAddTracking
           ? html`
               <div class="add-tracking">
@@ -165,9 +174,7 @@ color: var(--primary-text-color);
                   type="text"
                   placeholder="Enter tracking number"
                 />
-                <button @click="${this.handleAddTracking}">
-                  ➕
-</button>
+                <button @click="${this.handleAddTracking}">➕</button>
               </div>
             `
           : ""}
@@ -223,7 +230,7 @@ color: var(--primary-text-color);
                             .replace(/_/g, " ")
                             .replace(/\b\w/g, (c) => c.toUpperCase())}:</b
                         >
-                        ${key.includes("url")
+                        ${value.toLowerCase().startsWith("http")
                           ? html`<a href="${value}" target="_blank" class="link"
                               >${value}</a
                             >`
@@ -277,6 +284,10 @@ class AliExpressPackageCardEditor extends LitElement {
     return this.config?.hide_add_tracking || false;
   }
 
+  get _title() {
+    return this.config?.title || "AliExpress Package Tracker";
+  }
+
   handleExcludeChange(event) {
     const newExcludeAttributes = event.detail.value.exclude_attributes || [];
     this.config = { ...this.config, exclude_attributes: newExcludeAttributes };
@@ -293,6 +304,14 @@ class AliExpressPackageCardEditor extends LitElement {
     );
   }
 
+  handleTitleChange(event) {
+    const title = event.detail.value.title;
+    this.config = { ...this.config, title: title };
+    this.dispatchEvent(
+      new CustomEvent("config-changed", { detail: { config: this.config } })
+    );
+  }
+
   render() {
     if (!this.hass) {
       return html``;
@@ -301,13 +320,13 @@ class AliExpressPackageCardEditor extends LitElement {
     const allAttributes = [
       "order_number",
       "status",
-      "last_update_time",
       "last_update_status",
+      "last_update_time",
+      "daysNumber",
       "progressStatus",
+      "orignal_track_id",
       "carrier",
       "carrier_url",
-      "daysNumber",
-      "orignal_track_id",
       "order_url",
     ];
 
@@ -318,8 +337,17 @@ class AliExpressPackageCardEditor extends LitElement {
           .data=${{
             exclude_attributes: this._excludeAttributes,
             hide_add_tracking: this._hideAddTracking,
+            title: this._title,
           }}
           .schema=${[
+            {
+              name: "hide_add_tracking",
+              selector: {
+                boolean: {
+                  label: "Hide 'Add Tracking' Section",
+                },
+              },
+            },
             {
               name: "exclude_attributes",
               selector: {
@@ -334,17 +362,22 @@ class AliExpressPackageCardEditor extends LitElement {
                 },
               },
             },
+
             {
-              name: "hide_add_tracking",
+              name: "title",
               selector: {
-                boolean: {},
+                text: {
+                  value: this._title,
+                  placeholder: "Enter title",
+                },
               },
-              label: "Hide 'Add Tracking' Section",
+              label: "Title",
             },
           ]}
           @value-changed=${(event) => {
             this.handleExcludeChange(event);
             this.handleHideAddTrackingChange(event);
+            this.handleTitleChange(event);
           }}
         >
         </ha-form>
