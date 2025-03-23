@@ -1,6 +1,7 @@
+
 # AliExpress Package Card
 
-This custom Lovelace card displays packages from AliExpress, allowing you to track your orders directly from Home Assistant.
+This custom Lovelace card displays packages from AliExpress, allowing you to track your orders directly from Home Assistant with [AliExpress Tracker component ](https://github.com/yohaybn/HA_aliexpress_package_tracker_sensor).
 
 ## Features
 
@@ -11,26 +12,23 @@ This custom Lovelace card displays packages from AliExpress, allowing you to tra
 
 ## Installation
 
-### HACS (Preferred Way)
+### Installation via HACS (Recommended)
+1. Open HACS in your Home Assistant dashboard.
+2. Until this repository is part of HACS by default, you need to add it as a custom repository. (working on it)
+3. Go to *Integrations* > *Add custom repository* and enter:  ``` https://github.com/yohaybn/lovelace-aliexpress-package-card ```
+4. Once added, search for "AliExpress Package Tracker Card" in HACS and install it.
 
-1. Ensure that [HACS](https://hacs.xyz/) is installed in your Home Assistant instance.
-2. Go to HACS in the sidebar.
-3. Click on "Frontend".
-4. Click on the "+" button in the bottom right corner.
-5. Search for "AliExpress Package Card".
-6. Click on the card and then click "Install".
+[![My Home Assistant](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?repository=lovelace-aliexpress-package-card&owner=yohaybn)
 
 ### Manual Installation
 
-1. Download the `aliexpress_package_card.js` and `aliexpress_package_card_editor.js` files from the repository.
-2. Place the files in your `config/www` directory.
+1. Download the `aliexpress_package_card.js` file from the repository.
+2. Place the file in your `config/www` directory.
 3. Add the following to your `ui-lovelace.yaml` or Lovelace resources:
 
 ```yaml
 resources:
   - url: /local/aliexpress_package_card.js
-    type: module
-  - url: /local/aliexpress_package_card_editor.js
     type: module
 ```
 
@@ -57,7 +55,7 @@ exclude_attributes:
 
 ### Options
 
-- `title` (string): The title of the card.
+
 - `hide_add_tracking` (boolean): Whether to hide the "Add Tracking" section. Default is `false`.
 - `exclude_attributes` (list): List of attributes to exclude from the card display.
 
@@ -65,7 +63,6 @@ exclude_attributes:
 
 ```yaml
 type: custom:aliexpress-package-card
-title: My AliExpress Orders
 hide_add_tracking: false
 exclude_attributes:
   - carrier_url
@@ -74,11 +71,20 @@ exclude_attributes:
 
 ## Screenshots
 
-![AliExpress Package Card](screenshot.png)
+![AliExpress Package Card](https://github.com/yohaybn/lovelace-aliexpress-package-card/blob/main/images/screenshot_light.png)
+![AliExpress Package Card](https://github.com/yohaybn/lovelace-aliexpress-package-card/blob/main/images/screenshot_dark.png)
 
 ## Support
 
-If you encounter any issues or have questions, please open an issue on the [GitHub repository](https://github.com/your-repo/aliexpress-package-card).
+If you encounter any issues or have questions, please open an issue.
+
+
+### Donate
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/yohaybn)
+
+If you find it helpful or interesting, consider supporting me by buying me a coffee or starring the project on GitHub! ☕⭐
+Your support helps me improve and maintain this project while keeping me motivated. Thank you! ❤️
+
 
 ## License
 
