@@ -8,8 +8,27 @@ class AliExpressPackageCard extends LitElement {
   static properties = {
     hass: {},
     config: {},
+    carrierLogos: { type: Object },
   };
-
+  constructor() {
+    super();
+    this.carrierLogos = {};
+    this.loadCarrierLogos();
+  }
+  async loadCarrierLogos() {
+    try {
+      // Use relative path to fetch the JSON file
+      const basePath = new URL(".", import.meta.url).pathname;
+      const response = await fetch(`${basePath}carrier_logos.json`);
+      if (response.ok) {
+        this.carrierLogos = await response.json();
+      } else {
+        console.error("Failed to load carrier logos JSON");
+      }
+    } catch (error) {
+      console.error("Error loading carrier logos JSON:", error);
+    }
+  }
   static styles = css`
     .card {
       padding: 16px;
@@ -134,11 +153,13 @@ class AliExpressPackageCard extends LitElement {
   }
 
   handleAddTracking() {
+    const newTitle = prompt("Enter title:", "");
     const trackingNumber =
       this.shadowRoot.getElementById("trackingInput").value;
     if (trackingNumber) {
       this.hass.callService("aliexpress_package_tracker", "add_tracking", {
         tracking_number: trackingNumber,
+        title: newTitle,
       });
       this.shadowRoot.getElementById("trackingInput").value = "";
     }
@@ -192,10 +213,20 @@ class AliExpressPackageCard extends LitElement {
               const attributes = Object.entries(entity.attributes).filter(
                 ([key, value]) => value && !excludedAttributes.includes(key)
               );
-
+              // Add carrier logo if the key is "carrier"
+              const carrier = entity.attributes["carrier"];
+              const carrierLogo =
+                carrier && this.carrierLogos[carrier]
+                  ? html`<img
+                      src="${this.carrierLogos[carrier]}"
+                      alt="${carrier} logo"
+                      style="height: 48px; margin-right: 8px;"
+                    />`
+                  : null;
               return html`
                 <div class="package">
                   <div class="header">
+                    ${carrierLogo}
                     <span>${entity.attributes.title || entity_id}</span>
                     <div class="actions">
                       <button
@@ -230,6 +261,7 @@ class AliExpressPackageCard extends LitElement {
                             .replace(/_/g, " ")
                             .replace(/\b\w/g, (c) => c.toUpperCase())}:</b
                         >
+
                         ${value.toLowerCase().startsWith("http")
                           ? html`<a href="${value}" target="_blank" class="link"
                               >${value}</a
