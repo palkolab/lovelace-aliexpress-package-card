@@ -34,24 +34,19 @@ resources:
 
 ## Configuration
 
-Add the custom card to your Lovelace configuration:
+Add the card to your Lovelace UI with these options:
 
-```yaml
-type: custom:aliexpress-package-card
-title: AliExpress Package Tracker
-hide_add_tracking: false
-exclude_attributes:
-  - order_number
-  - status
-  - last_update_time
-  - last_update_status
-  - progressStatus
-  - carrier
-  - carrier_url
-  - daysNumber
-  - orignal_track_id
-  - order_url
-```
+-   **`type:`** (Required)
+    -   Set to `custom:aliexpress-package-card` to load this card.
+-   **`title:`** (Optional)
+    -   Text displayed at the top of the card (e.g., "AliExpress Tracking").
+-   **`hide_add_tracking:`** (Optional)
+    -   Boolean (`true`/`false`). Set to `true` to hide the "Add Tracking" section.
+    -   Default: `false` (shown).
+-   **`exclude_attributes:`** (Optional)
+    -   A list of attribute names (strings) to hide from the package details display.
+    -   Examples: `order_number`, `status`, `last_update_time`, `carrier_url`, `order_url`.
+    -   Default: Empty list (shows all attributes).
 
 ### Options
 
