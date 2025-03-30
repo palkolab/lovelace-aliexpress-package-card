@@ -3,6 +3,11 @@
 
 This custom Lovelace card displays packages from AliExpress, allowing you to track your orders directly from Home Assistant with [AliExpress Tracker component ](https://github.com/yohaybn/HA_aliexpress_package_tracker_sensor).
 
+## Screenshots
+
+![AliExpress Package Card](https://github.com/yohaybn/lovelace-aliexpress-package-card/blob/main/images/screenshot_light.png)
+![AliExpress Package Card](https://github.com/yohaybn/lovelace-aliexpress-package-card/blob/main/images/screenshot_dark.png)
+
 ## Features
 
 - Display AliExpress package tracking information
@@ -64,10 +69,16 @@ exclude_attributes:
   - order_url
 ```
 
-## Screenshots
+## Carrier Logos Feature
 
-![AliExpress Package Card](https://github.com/yohaybn/lovelace-aliexpress-package-card/blob/main/images/screenshot_light.png)
-![AliExpress Package Card](https://github.com/yohaybn/lovelace-aliexpress-package-card/blob/main/images/screenshot_dark.png)
+The  **AliExpress Package Card**  supports displaying carrier logos for better visual identification of shipping carriers. This feature uses a JSON file (`carrier_logos.json`) to map carrier names to their respective logo URLs.
+
+#### Automatic Fallback to Favicon
+If a carrier logo is not found in the  `carrier_logos.json`  file, the card will attempt to fetch the favicon from the carrier's website (if a  `carrier_url`  is provided in the tracking data). This ensures that a visual representation is available even if a specific logo is not defined.
+
+#### Contributing Carrier Logos
+
+If you have added custom carrier logos that you think would benefit other users, feel free to contribute them to the repository! Submit a pull request with your additions to the  `carrier_logos.json`  file. This helps improve the card for everyone.
 
 ## Support
 
