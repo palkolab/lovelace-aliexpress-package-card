@@ -120,6 +120,8 @@ class AliExpressPackageCard extends LitElement {
     daysNumber: "📅",
     orignal_track_id: "🔖",
     order_url: "🔗",
+    originCountry: "🌍",
+    destCountry: "🌎",
   };
 
   setConfig(config) {
@@ -215,10 +217,17 @@ class AliExpressPackageCard extends LitElement {
               );
               // Add carrier logo if the key is "carrier"
               const carrier = entity.attributes["carrier"];
+              const carrierUrl = entity.attributes["carrier_url"];
               const carrierLogo =
                 carrier && this.carrierLogos[carrier]
                   ? html`<img
                       src="${this.carrierLogos[carrier]}"
+                      alt="${carrier} logo"
+                      style="height: 48px; margin-right: 8px;"
+                    />`
+                  : carrierUrl
+                  ? html`<img
+                      src="https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${carrierUrl}&size=64"
                       alt="${carrier} logo"
                       style="height: 48px; margin-right: 8px;"
                     />`
@@ -249,7 +258,12 @@ class AliExpressPackageCard extends LitElement {
                   </div>
                   ${attributes.map(([key, value]) => {
                     const icon =
-                      AliExpressPackageCard.attributeIcons[key] || "ℹ️";
+                      key === "progressStatus"
+                        ? value === "NORMAL"
+                          ? "🟢" // Green dot for NORMAL
+                          : "🔴" // Red dot for other statuses
+                        : AliExpressPackageCard.attributeIcons[key] || "ℹ️";
+
                     const displayValue = key.includes("time")
                       ? this.formatTime(value)
                       : value;
@@ -259,14 +273,14 @@ class AliExpressPackageCard extends LitElement {
                         <b
                           >${key
                             .replace(/_/g, " ")
-                            .replace(/\b\w/g, (c) => c.toUpperCase())}:</b
-                        >
-
+                            .replace(/\b\w/g, (c) => c.toUpperCase())}:
+                        </b>
+                        <span> </span>
                         ${value.toLowerCase().startsWith("http")
                           ? html`<a href="${value}" target="_blank" class="link"
                               >${value}</a
                             >`
-                          : html`${displayValue}`}
+                          : html` ${displayValue}`}
                       </div>
                     `;
                   })}
@@ -360,6 +374,8 @@ class AliExpressPackageCardEditor extends LitElement {
       "carrier",
       "carrier_url",
       "order_url",
+      "originCountry",
+      "destCountry",
     ];
 
     return html`
