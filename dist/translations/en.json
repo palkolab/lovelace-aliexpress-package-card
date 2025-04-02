@@ -9,7 +9,7 @@
     "not_available": "N/A"
   },
   "attribute": {
-    "order_number": "Order Number",
+    "order_number": "Tracking Number",
     "last_update_time": "Last Update Time",
     "status": "Overall Status",
     "last_update_status": "Last Event Detail",
