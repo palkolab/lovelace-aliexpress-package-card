@@ -9,10 +9,10 @@
     "not_available": "לא זמין"
   },
   "attribute": {
-    "order_number": "מספר הזמנה",
-    "status": "סטטוס",
+    "order_number": "מספר מעקב",
     "last_update_time": "זמן עדכון אחרון",
-    "last_update_status": "סטטוס עדכון אחרון",
+    "status": "Overall Status",
+    "last_update_status": "Last Event Detail",
     "progressStatus": "סטטוס התקדמות",
     "carrier": "מוביל",
     "carrier_url": "כתובת URL של המוביל",
