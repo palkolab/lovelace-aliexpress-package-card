@@ -1,5 +1,3 @@
-// --- START OF FILE aliexpress_package_card.js ---
-
 const LitElement = Object.getPrototypeOf(
   customElements.get("ha-panel-lovelace")
 );
@@ -563,10 +561,11 @@ class AliExpressPackageCard extends LitElement {
                     </div>
                   </div>
                   ${filteredAttributes.map(([key, value]) => {
-                    const icon =
+                    let icon =
                       AliExpressPackageCard.attributeIcons[key] || "ℹ️";
                     let displayValue;
                     if (key === "progressStatus") {
+                      icon = value === "NORMAL" ? "🟢" : "🔴";
                       displayValue = this.getTranslatedStatusValue(value);
                     } else if (key.includes("time")) {
                       displayValue = this.formatTime(value);
