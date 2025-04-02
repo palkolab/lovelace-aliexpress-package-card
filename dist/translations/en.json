@@ -10,9 +10,9 @@
   },
   "attribute": {
     "order_number": "Order Number",
-    "status": "Status",
     "last_update_time": "Last Update Time",
-    "last_update_status": "Last Update Status",
+    "status": "Overall Status",
+    "last_update_status": "Last Event Detail",
     "progressStatus": "Progress Status",
     "carrier": "Carrier",
     "carrier_url": "Carrier URL",
