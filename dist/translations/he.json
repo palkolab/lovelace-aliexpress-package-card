@@ -11,8 +11,8 @@
   "attribute": {
     "order_number": "מספר מעקב",
     "last_update_time": "זמן עדכון אחרון",
-    "status": "Overall Status",
-    "last_update_status": "Last Event Detail",
+    "status": "סטטוס כללי",      
+    "last_update_status": "פרטי אירוע אחרון",
     "progressStatus": "סטטוס התקדמות",
     "carrier": "מוביל",
     "carrier_url": "כתובת URL של המוביל",
