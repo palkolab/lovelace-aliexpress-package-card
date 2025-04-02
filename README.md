@@ -11,8 +11,9 @@ This custom Lovelace card displays packages from AliExpress, allowing you to tra
 ## Features
 
 - Display AliExpress package tracking information
-- Add new tracking numbers
+- Add new tracking numbers directly from the card
 - Edit and remove existing tracking numbers
+- Multi-language support with community-contributed translations *([See Localization section](#-localization--translations))*
 - Compatible with both light and dark themes
 
 ## Installation
@@ -67,16 +68,65 @@ hide_add_tracking: false
 exclude_attributes:
   - carrier_url
   - order_url
+language: fr
 ```
+## 🌍 Localization / Translations
 
-## Carrier Logos Feature
+This card supports displaying text in multiple languages using translation files located in the translations/ directory.
 
-The  **AliExpress Package Card**  supports displaying carrier logos for better visual identification of shipping carriers. This feature uses a JSON file (`carrier_logos.json`) to map carrier names to their respective logo URLs.
+**How it Works:**
 
-#### Automatic Fallback to Favicon
-If a carrier logo is not found in the  `carrier_logos.json`  file, the card will attempt to fetch the favicon from the carrier's website (if a  `carrier_url`  is provided in the tracking data). This ensures that a visual representation is available even if a specific logo is not defined.
+-   Each supported language has a JSON file (e.g., en.json, es.json).
+    
+-   The card uses English (en.json) as the default and fallback language. If a translation is missing in your selected language, it will display the English text instead.
+    
+-   An index.json file lists the available languages for selection in the card's editor.
+    
 
-#### Contributing Carrier Logos
+**🙏 Help Improve Translations!**
+
+The current non-English translations were generated using AI and **may contain errors or sound unnatural**. We rely on the community to improve them!
+
+**How to Contribute:**
+
+1.  **Find the translations/ folder** in the card's source directory.
+    
+2.  **Copy en.json** and **rename** it using the [ISO 639-1 code](https://www.google.com/url?sa=E&q=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FList_of_ISO_639-1_codes) for your language (e.g., pt.json for Portuguese).
+    
+3.  **Translate** the **string values** (text after the colons) in your new file. **Do not change the keys** (text before colons). Use a UTF-8 compatible editor.
+    
+4.  **Add your language** to translations/index.json, following the existing format (e.g., { "code": "pt", "name": "Português" }).
+    
+5.  **Submit** your changes via a Pull Request or GitHub Issue on the card's repository.
+    
+
+Your contributions help make this card better for everyone!
+
+## 🚚 Carrier Logos
+
+This card displays carrier logos for easier visual identification.
+
+**How it Works:**
+-   Logos are mapped from carrier names to image URLs in the `carrier_logos.json` file.  
+-   If a logo isn't in the file, the card attempts to use the carrier's website favicon as a fallback (requires carrier_url attribute).
+    
+
+**🙏 Help Expand Logo Coverage!**
+The included logo list might be incomplete. Adding logos for more carriers benefits everyone.
+**How to Contribute:**
+1.  **Find** a public URL for the missing carrier's logo.
+2.  **Add** an entry to carrier_logos.json, mapping the exact carrier name (from attributes) to the logo URL. 
+    ```
+    // carrier_logos.json - Example Addition
+    {
+      // ... existing logos ...
+      "Specific Carrier Name": "https://carrier.com/logo.png"
+    }
+    ```
+    
+3.  **Submit** your additions via a Pull Request or GitHub Issue on the card's repository.
+    
+Your contributions make the card more visually helpful!
 
 If you have added custom carrier logos that you think would benefit other users, feel free to contribute them to the repository! Submit a pull request with your additions to the  `carrier_logos.json`  file. This helps improve the card for everyone.
 
