@@ -489,6 +489,7 @@ class AliExpressPackageCard extends LitElement {
                 "icon",
                 "attribution",
                 "friendly_name",
+                "status_english",
                 ...(this.config?.exclude_attributes || []),
               ];
 
