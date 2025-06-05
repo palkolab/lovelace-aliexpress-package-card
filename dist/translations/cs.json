@@ -1,7 +1,7 @@
 {
   "common": {
     "default_title": "AliExpress zásilky",
-    "no_packages": "Nebyly nalezeny žádné záslky ke sledování.",
+    "no_packages": "Nebyly nalezeny žádné zásilky ke sledování.",
     "enter_tracking_number": "Vložit sledovací číslo",
     "add_tracking": "Přidat sledování",
     "edit_title": "Upravit název",
