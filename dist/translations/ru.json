@@ -12,7 +12,7 @@
     "order_number": "Трек-номер",
     "last_update_time": "Последнее обновление",
     "status": "Состояние",
-    "last_update_status": "Последнее статус",
+    "last_update_status": "Последний статус",
     "progressStatus": "Статус",
     "carrier": "Перевозчик",
     "carrier_url": "Сайт перевозчика",
