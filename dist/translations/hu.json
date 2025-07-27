@@ -1,0 +1,36 @@
+{
+  "common": {
+    "default_title": "AliExpress Csomagok",
+    "no_packages": "Nincsenek nyomon követett csomagok.",
+    "enter_tracking_number": "Add meg a nyomonkövetési számot",
+    "add_tracking": "Követés hozzáadása",
+    "edit_title": "Cím szerkesztése",
+    "remove_tracking": "Követés eltávolítása",
+    "not_available": "N/A"
+  },
+  "attribute": {
+    "order_number": "Nyomonkövetési szám",
+    "last_update_time": "Utolsó frissítés ideje",
+    "status": "Általános állapot",
+    "last_update_status": "Utolsó esemény részlete",
+    "progressStatus": "Folyamat állapota",
+    "carrier": "Futárszolgálat",
+    "carrier_url": "Futár webcíme",
+    "daysNumber": "Napok száma a feladás óta",
+    "orignal_track_ids": "Nyomonkövetési azonosító",
+    "order_url": "Rendelés URL-je",
+    "originCountry": "Küldő ország",
+    "destCountry": "Célország"
+  },
+  "editor": {
+    "card_title": "Kártya címe",
+    "hide_add_tracking": "'Követés hozzáadása' rész elrejtése",
+    "exclude_attributes": "Attribútumok kizárása (Válaszd ki, melyeket rejtsük el)",
+    "attribute_label": "Attribútum: {attribute_name}"
+  },
+  "status_value": {
+    "NORMAL": "Normál",
+    "ABNORMAL": "Rendellenes",
+    "UNKNOWN": "Ismeretlen"
+  }
+}
